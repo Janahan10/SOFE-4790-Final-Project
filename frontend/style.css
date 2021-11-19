@@ -1,0 +1,50 @@
+body {
+    background-color: rgb(255, 83, 83) ;
+    text-align: center;
+    margin-top: 5rem;
+    border-radius: 8px;
+}
+
+header {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: rgb(252, 70, 70) ;
+}
+
+.main-container {
+    background-color: white;
+    width: 30%;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+label {
+    font-size: large;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.submit-button {
+    font-size: large;
+    height: 2rem;
+    width: 75%;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+
+.submit-button:hover {
+    background-color:rgb(83, 255, 106);
+}
+
+form {
+    margin: 0 auto;
+}
+
+input, select {
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
+    width: 75%;
+    background-color: white;
+    font-size: large;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
