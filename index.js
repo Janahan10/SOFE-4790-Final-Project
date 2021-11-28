@@ -1,10 +1,27 @@
 const express = require('express')
-const path = require('path')
 const app = express()
-const PORT = 5000 || process.env.PORT
+const http = require('http')
+const path = require('path')
+const io = require('socket.io')
 
-app.use(express.static(path.join(__dirname, 'frontend')))
+const PORT = 5000 || process.env.PORT;
 
-if (app.listen(PORT)) {
-    console.log(`Server is running on ${PORT}`)
+const server = http.createServer(app);
+const socket = io(server);
+
+app.use(express.static(path.join(__dirname, 'frontend')));
+
+socket.on('connection', client => {
+    console.log("new connections")
+
+    client.emit('data', "welcome to chatroom!")
+    client.broadcast.emit('data', 'New user has joined chatroom!')
+
+    client.on('msg', (message) => {
+        client.emit('data', message)
+    })
+})
+
+if(server.listen(PORT)) {
+    console.log(`server running on ${PORT}`)
 }

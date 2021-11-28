@@ -48,3 +48,39 @@ input, select {
     padding: 10px;
     text-align: center;
 }
+
+.chatroom-container {
+	max-width: 75%;
+	background: #fff;
+	margin: 30px auto;
+	overflow: hidden;
+}
+
+.main-container {
+    width: 90%;
+}
+
+.chat-header {
+	background: whitesmoke;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+    color: rgb(0, 0, 0);
+	padding-left: 40px;
+    padding-right: 40px;
+}
+
+.messages-container {
+    padding: 30px;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.message {
+    text-align: left;
+    background-color: whitesmoke;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+
