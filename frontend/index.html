@@ -15,14 +15,14 @@
             <h1>Distr Chat</h1>
         </header>
         
-        <form action="./chatroom.html">
+        <form action="./chatroom.html" method="get">
             <label class="username">Username: </label>
             <br>
-            <input required placeholder="username" type="text" id="username">
+            <input required placeholder="username" name="username" type="text" id="username">
             <br>
             <label class="chat-room-select">Choose Room: </label>
             <br>
-            <select id="chat-room">
+            <select id="chat-room" name="chatroom">
                 <option value="School">School</option>
                 <option value="Sports">Sports</option>
                 <option value="Entertainment">Entertainment</option>

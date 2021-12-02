@@ -3,6 +3,13 @@ var chatBox = document.querySelector('.message-container')
 
 const socket = io();
 
+const queryString = window.location.search
+const params = new URLSearchParams(queryString)
+const username = params.get('username')
+const chatroom = params.get('chatroom')
+
+socket.emit('join', {username, chatroom})
+
 socket.on('data', data => {
     console.log(data)
     showMessage(data)
@@ -10,12 +17,12 @@ socket.on('data', data => {
 })
 
 
-function showMessage(string) {
+function showMessage(data) {
     var messageContainer = document.createElement('div')
     messageContainer.classList.add('message')
-    messageContainer.innerHTML = `<b><p>Username <span>time pm</span></p></b>
+    messageContainer.innerHTML = `<p><b>${data.username}</b> <span>${data.time}</span></p>
     <p class="msg">
-        ${string}
+        ${data.message}
     </p>`
     document.querySelector('.messages-container').appendChild(messageContainer)
 
