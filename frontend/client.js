@@ -38,3 +38,11 @@ chatForm.addEventListener('submit', (event) => {
     event.target.elements.chat.focus();
 })
 
+document.getElementById('leave').addEventListener('click', () =>{
+    var leaveConfirmation = confirm('Do you want to leave the chatroom?');
+
+    if (leaveConfirmation == true) {
+        window.location = './index.html'
+    }
+})
+
