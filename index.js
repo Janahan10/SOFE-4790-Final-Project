@@ -3,6 +3,8 @@ const app = express()
 const http = require('http')
 const path = require('path')
 const io = require('socket.io')
+const _ = require('underscore')
+const fs = require('fs')
 
 const formatData = require('./data')
 const {joinChatroom, getUser, removeUser} = require('./user')
@@ -21,6 +23,9 @@ socket.on('connection', client => {
         joinChatroom(client.id, username, chatroom)
         client.join(chatroom)
 
+        // var chat_data = fs.readFileSync('chat_data.json')
+        // var chat_data_obj = JSON.parse(chat_data)
+
         client.emit('data', formatData(sysName, "welcome to chatroom!"))
         client.broadcast.to(chatroom).emit('data', formatData(sysName, `${username} has joined chatroom!`))
     })
@@ -31,13 +36,23 @@ socket.on('connection', client => {
     client.on('disconnect', () => {
         const currentUser = getUser(client.id)
         removeUser(client.id)
-        socket.to(currentUser.chatroom).emit('data', formatData(sysName, `${currentUser.username} has left chatroom`))
+        socket.to(currentUser.chatroom).emit('data', formatData(sysName, `${currentUser.username} has left chatroom`, currentUser.chatroom))
     })
 
 
     client.on('msg', (message) => {
         const currentUser = getUser(client.id)
-        socket.to(currentUser.chatroom).emit('data', formatData(`${currentUser.username}`, message))
+
+        var chat_data = fs.readFileSync('chat_data.json')
+        var chat_data_obj = JSON.parse(chat_data)
+        var msgData = formatData(`${currentUser.username}`, message, currentUser.chatroom)
+        chat_data_obj.push(msgData)
+        fs.writeFileSync('chat_data.json', JSON.stringify(chat_data_obj), (err) =>{
+            if (err) throw err;
+            console.log("Message saved")
+        })
+        
+        socket.to(currentUser.chatroom).emit('data', formatData(`${currentUser.username}`, message, currentUser.chatroom))
     })
 })
 
