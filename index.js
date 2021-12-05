@@ -23,9 +23,13 @@ socket.on('connection', client => {
         joinChatroom(client.id, username, chatroom)
         client.join(chatroom)
 
-        // var chat_data = fs.readFileSync('chat_data.json')
-        // var chat_data_obj = JSON.parse(chat_data)
+        var chat_data = fs.readFileSync('chat_data.json')
+        var chat_data_obj = JSON.parse(chat_data)
+        // console.log(chat_data_obj)
+        var history = _.where(chat_data_obj, {chatroom: chatroom})
+        console.log(history)
 
+        client.emit('chat_history', history)
         client.emit('data', formatData(sysName, "welcome to chatroom!"))
         client.broadcast.to(chatroom).emit('data', formatData(sysName, `${username} has joined chatroom!`))
     })
