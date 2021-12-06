@@ -16,6 +16,12 @@ socket.on('data', data => {
     // chatBox.scrollTop = chatBox.scrollHeight
 })
 
+socket.on('chat_history', history => {
+    console.log(history)
+    for (var msg of history){
+        showMessage(msg)
+    }
+})
 
 function showMessage(data) {
     var messageContainer = document.createElement('div')
